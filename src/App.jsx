@@ -1,25 +1,35 @@
 import { useState } from 'react'
+import Navbar from './components/Navbar'
+import Hero from './components/Hero'
+import QuoteCard from './components/QuoteCard'
+import Footer from './components/Footer'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [started, setStarted] = useState(false)
+
+  const handleGetStarted = () => {
+    // For now, simply toggle state; next step will navigate to the advice flow page
+    setStarted(true)
+  }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50 flex items-center justify-center">
-      <div className="bg-white p-8 rounded-lg shadow-lg">
-        <h1 className="text-3xl font-bold text-gray-800 mb-4">
-          Vibe Coding Platform
-        </h1>
-        <p className="text-gray-600 mb-6">
-          Your AI-powered development environment
-        </p>
-        <div className="text-center">
-          <button
-            onClick={() => setCount(count + 1)}
-            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded"
-          >
-            Count is {count}
-          </button>
-        </div>
+    <div className="min-h-screen bg-gradient-to-b from-emerald-50 via-white to-lime-50 text-gray-900">
+      <div className="max-w-6xl mx-auto px-4">
+        <Navbar />
+        {!started ? (
+          <>
+            <Hero onGetStarted={handleGetStarted} />
+            <QuoteCard />
+          </>
+        ) : (
+          <section className="max-w-3xl mx-auto text-center py-24">
+            <h2 className="text-3xl sm:text-4xl font-bold">Welcome to KisaanMitra</h2>
+            <p className="mt-4 text-gray-700">
+              We will guide you step-by-step with real-time advice. Next, we'll set up the advice page where you can select your crop and location.
+            </p>
+          </section>
+        )}
+        <Footer />
       </div>
     </div>
   )
